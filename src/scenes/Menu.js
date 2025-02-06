@@ -6,7 +6,7 @@ class Menu extends Phaser.Scene {
 
     preload() {
         this.load.image("background", "assets/MenuBackground.PNG");
-        this.load.image("cloud", "assets/MenuCloud.png");
+        this.load.image("cloud", "assets/MenuCloud.PNG");
         this.load.audio("bgMusic", "assets/BackgroundMusic.mp3");
         this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
     }
