@@ -33,6 +33,7 @@ class Play extends Phaser.Scene {
         this.distance = 0;
         this.highScore = this.registry.get("highScore") || 0;
         this.carrotsCollected = 0;
+        this.isGameOver = false;
 
        
         this.menuButton = this.add.text(
@@ -194,49 +195,50 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        if (this.isPaused) return;
-
+        if (this.isPaused || this.isGameOver) return;
+    
         this.bg1.x -= this.scrollSpeed;
         this.bg2.x -= this.scrollSpeed;
-
+    
         if (this.bg1.x <= -this.bg1.displayWidth / 2) {
             this.bg1.x = this.bg2.x + this.bg2.displayWidth;
         }
-
+    
         if (this.bg2.x <= -this.bg2.displayWidth / 2) {
             this.bg2.x = this.bg1.x + this.bg1.displayWidth;
         }
-
+    
         this.enemies.getChildren().forEach((enemy) => {
             if (enemy.x < -enemy.width) {
                 enemy.destroy();
             }
         });
-
+    
         this.carrots.getChildren().forEach((carrot) => {
             if (carrot.x < -carrot.width) {
                 carrot.destroy();
             }
         });
-
+    
         this.distance += this.scrollSpeed / 10;
         this.distanceText.setText(`Distance: ${Math.floor(this.distance)}`);
-
+    
         if (this.distance > this.highScore) {
             this.highScore = this.distance;
             this.highScoreText.setText(`High Score: ${Math.floor(this.highScore)}`);
             this.registry.set("highScore", Math.floor(this.highScore));
         }
-
+    
         if (this.cursors.space.isDown && this.player.body.touching.down) {
             this.player.setVelocityY(this.jumpVelocity);
             this.jumpSound.play();
         }
-
+    
         if (this.player.body.touching.down && this.player.anims.currentAnim.key !== "run") {
             this.player.anims.play("run", true);
         }
     }
+    
 
     spawnEnemy() {
         const groundLevelY = this.scale.height - 125;
@@ -283,15 +285,16 @@ class Play extends Phaser.Scene {
     }
 
     gameOver(player, enemy) {
+        this.isGameOver = true;
         this.physics.pause();
         this.player.setTint(0xff0000);
         this.player.anims.stop();
         enemy.destroy();
-
+    
         this.gameOverSound.play();
-
+    
         this.registry.set("highScore", Math.floor(this.highScore));
-
+    
         const gameOverText = this.add.text(
             this.scale.width / 2,
             this.scale.height / 2 - 50,
@@ -303,7 +306,7 @@ class Play extends Phaser.Scene {
             }
         );
         gameOverText.setOrigin(0.5);
-
+    
         const menuButton = this.add.text(
             this.scale.width / 2,
             this.scale.height / 2 + 10,
@@ -320,7 +323,7 @@ class Play extends Phaser.Scene {
             .on("pointerdown", () => {
                 this.scene.start("Menu");
             });
-
+    
         const restartButton = this.add.text(
             this.scale.width / 2,
             this.scale.height / 2 + 70,
