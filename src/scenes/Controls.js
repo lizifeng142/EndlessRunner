@@ -39,7 +39,7 @@ class Controls extends Phaser.Scene {
                     strokeThickness: 6
                 }).setOrigin(0.5);
 
-                this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, "Space Bar  - Jump", {
+                this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, "Space Bar - Jump", {
                     fontFamily: "Fredoka One",
                     fontSize: "30px",
                     fill: "#ffffff",
@@ -47,7 +47,15 @@ class Controls extends Phaser.Scene {
                     strokeThickness: 4
                 }).setOrigin(0.5);
 
-                this.add.text(this.cameras.main.width / 2, this.cameras.main.height - 180, "Goal: Try to avoid the wolf,", {
+                this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2.5, "P - PAUSE/UNPAUSE", {
+                    fontFamily: "Fredoka One",
+                    fontSize: "30px",
+                    fill: "#ffffff",
+                    stroke: "#003333",
+                    strokeThickness: 4
+                }).setOrigin(0.5);
+
+                this.add.text(this.cameras.main.width / 2, this.cameras.main.height - 180, "Goal: Try to avoid the wolf and collect carrots,", {
                     fontFamily: "Fredoka One",
                     fontSize: "28px",
                     fill: "#ffcc00",
