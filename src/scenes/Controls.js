@@ -39,7 +39,7 @@ class Controls extends Phaser.Scene {
                     strokeThickness: 6
                 }).setOrigin(0.5);
 
-                this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2.5, "Arrow Key ↑ - Jump", {
+                this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, "Space Bar  - Jump", {
                     fontFamily: "Fredoka One",
                     fontSize: "30px",
                     fill: "#ffffff",
@@ -47,15 +47,7 @@ class Controls extends Phaser.Scene {
                     strokeThickness: 4
                 }).setOrigin(0.5);
 
-                this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, "Arrow Key ↓ - Duck", {
-                    fontFamily: "Fredoka One",
-                    fontSize: "30px",
-                    fill: "#ffffff",
-                    stroke: "#003333",
-                    strokeThickness: 4
-                }).setOrigin(0.5);
-
-                this.add.text(this.cameras.main.width / 2, this.cameras.main.height - 180, "Goal: Try to avoid the hawk and wolf,", {
+                this.add.text(this.cameras.main.width / 2, this.cameras.main.height - 180, "Goal: Try to avoid the wolf,", {
                     fontFamily: "Fredoka One",
                     fontSize: "28px",
                     fill: "#ffcc00",
@@ -63,7 +55,7 @@ class Controls extends Phaser.Scene {
                     strokeThickness: 4
                 }).setOrigin(0.5);
 
-                this.add.text(this.cameras.main.width / 2, this.cameras.main.height - 140, "while you try to get as many carrots as you can!", {
+                this.add.text(this.cameras.main.width / 2, this.cameras.main.height - 140, "Try to get as Far as you can!", {
                     fontFamily: "Fredoka One",
                     fontSize: "28px",
                     fill: "#ffcc00",

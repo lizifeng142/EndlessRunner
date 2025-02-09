@@ -1,7 +1,7 @@
 class Menu extends Phaser.Scene {
     constructor() {
         super("Menu");
-        this.musicPlaying = true; // Track music state
+        this.musicPlaying = true;
     }
 
     preload() {
@@ -12,7 +12,6 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
-        // Play background music if not already playing
         if (!this.sound.get("bgMusic")) {
             this.music = this.sound.add("bgMusic", { loop: true, volume: 0.2 });
             this.music.play();
@@ -26,7 +25,7 @@ class Menu extends Phaser.Scene {
         this.cloud = this.add.image(-100, 350, "cloud").setScale(0.8);
         this.cloudSpeed = 1;
 
-        const highScore = this.registry.get("highScore") || 0; // Retrieve the highscore from global data
+        const highScore = this.registry.get("highScore") || 0;
 
         WebFont.load({
             google: { families: ['Fredoka One', 'Baloo 2'] },
@@ -49,7 +48,6 @@ class Menu extends Phaser.Scene {
             }
         });
 
-        // Function to create buttons with pop effect
         const createButton = (x, y, text, color, callback) => {
             let button = this.add.text(x, y, text, {
                 fontSize: "28px",
@@ -84,25 +82,38 @@ class Menu extends Phaser.Scene {
             return button;
         };
 
-        // Create Play button
         createButton(400, 350, "Play", "#00c6ff", () => this.scene.start("Play"));
-
-        // Create Controls button
         createButton(400, 450, "Controls", "#0072ff", () => this.scene.start("Controls"));
-
-        // Create Credits button
         createButton(400, 550, "Credits", "#00c6ff", () => this.scene.start("Credits"));
 
-        // Add Music On/Off button in the top-right corner
         const musicButton = this.add.text(this.scale.width - 50, 50, "Music: On", {
             fontSize: "20px",
             fontFamily: "Arial",
-            backgroundColor: "#ff0000", // Red background
+            backgroundColor: "#ff0000",
             padding: { x: 10, y: 5 },
             color: "#fff",
-        }).setOrigin(1, 0.5).setInteractive(); // Align to the top-right corner
+        }).setOrigin(1, 0.5).setInteractive();
 
-        // Handle Music On/Off toggle
+        musicButton.on("pointerover", () => {
+            this.tweens.add({
+                targets: musicButton,
+                scaleX: 1.1,
+                scaleY: 1.1,
+                duration: 150,
+                ease: "Power1",
+            });
+        });
+
+        musicButton.on("pointerout", () => {
+            this.tweens.add({
+                targets: musicButton,
+                scaleX: 1,
+                scaleY: 1,
+                duration: 150,
+                ease: "Power1",
+            });
+        });
+
         musicButton.on("pointerdown", () => {
             this.musicPlaying = !this.musicPlaying;
 
@@ -123,4 +134,3 @@ class Menu extends Phaser.Scene {
         }
     }
 }
-

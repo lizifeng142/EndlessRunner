@@ -10,15 +10,12 @@ class Credits extends Phaser.Scene {
     }
 
     create() {
-        // Background
         let bg = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, "background");
         bg.setScale(Math.max(this.cameras.main.width / bg.width, this.cameras.main.height / bg.height));
 
-        // Cloud
         this.cloud = this.add.image(-100, this.cameras.main.height / 2, "cloud").setScale(0.8);
         this.cloudSpeed = 1;
 
-        // **Back Button (Bottom Left)**
         let backButton = this.add.text(80, this.cameras.main.height - 50, "Back", {
             fontSize: "28px",
             fontFamily: "Arial",
@@ -28,14 +25,12 @@ class Credits extends Phaser.Scene {
         }).setOrigin(0.5).setInteractive();
 
         backButton.on("pointerdown", () => {
-            this.scene.start("Menu"); // Go back to Menu
+            this.scene.start("Menu");
         });
 
-        // Fix: Create title text after WebFont loads
         WebFont.load({
             google: { families: ['Fredoka One'] },
             active: () => {
-                // **Illustration Section**
                 this.add.text(400, 300, "Illustrators:", {
                     fontFamily: "Fredoka One",
                     fontSize: "72px", 
@@ -44,14 +39,12 @@ class Credits extends Phaser.Scene {
                     strokeThickness: 4
                 }).setOrigin(0.5);
 
-                // **Illustrator Name (Centered Below)**
                 this.add.text(400, 400, "Calvin L. and Stephanie L.", {
                     fontFamily: "Fredoka One",
                     fontSize: "50px",
                     fill: "#ffcc00"
                 }).setOrigin(0.5);
 
-                // **Music Section**
                 this.add.text(400, 500, "Music:", {
                     fontFamily: "Fredoka One",
                     fontSize: "72px", 
@@ -60,7 +53,6 @@ class Credits extends Phaser.Scene {
                     strokeThickness: 4
                 }).setOrigin(0.5);
 
-                
                 this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 3 + 310, "PixelBay.com (for specifics look at READ.MD)", {
                     fontFamily: "Fredoka One",
                     fontSize: "20px", 
@@ -71,10 +63,9 @@ class Credits extends Phaser.Scene {
     }
 
     update() {
-        // Move cloud across the screen
         this.cloud.x += this.cloudSpeed;
         if (this.cloud.x > 900) {
-            this.cloud.x = -150; // Reset position when it goes off screen
+            this.cloud.x = -150;
         }
     }
 }
