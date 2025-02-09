@@ -6,7 +6,6 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image("background1", "assets/Background_Ingame.JPG");
         this.load.spritesheet("runner", "assets/Run.png", { frameWidth: 2048, frameHeight: 1536 });
-        this.load.spritesheet("jumper", "assets/Jump.png", { frameWidth: 128, frameHeight: 128 });
         this.load.image("wolf", "assets/Wolf.PNG");
         this.load.image("carrot", "assets/Carrot.PNG");
         this.load.audio("jumpSound", "assets/Cartoon_Jump.wav");
@@ -81,7 +80,7 @@ class Play extends Phaser.Scene {
             key: "run",
             frameRate: 2,
             repeat: -1,
-            frames: this.anims.generateFrameNumbers("runner", { start: 0, end: 2 }),
+            frames: this.anims.generateFrameNumbers("runner", { start: 0, end: 1 }),
         });
 
         this.player = this.physics.add.sprite(200, this.scale.height - 200, "runner");
