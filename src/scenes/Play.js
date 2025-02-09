@@ -35,6 +35,48 @@ class Play extends Phaser.Scene {
         this.highScore = this.registry.get("highScore") || 0;
         this.carrotsCollected = 0;
 
+       
+        this.menuButton = this.add.text(
+            this.scale.width - 20, 
+            20,                  
+            "Main Menu",         
+            {
+                fontSize: "20px",
+                fill: "#ffffff",
+                backgroundColor: "#0072ff",
+                padding: { x: 10, y: 5 },
+                fontFamily: "Arial",
+            }
+        )
+            .setOrigin(1, 0) 
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.scene.start("Menu"); 
+            });
+
+       
+        this.menuButton.on("pointerover", () => {
+            this.tweens.add({
+                targets: this.menuButton,
+                scaleX: 1.1, 
+                scaleY: 1.1,
+                duration: 100,
+                ease: "Power1",
+            });
+        });
+
+        
+        this.menuButton.on("pointerout", () => {
+            this.tweens.add({
+                targets: this.menuButton,
+                scaleX: 1,
+                scaleY: 1,
+                duration: 100,
+                ease: "Power1",
+            });
+        });
+
+
         this.anims.create({
             key: "run",
             frameRate: 2,
@@ -67,7 +109,7 @@ class Play extends Phaser.Scene {
         });
 
         this.carrotSpawnEvent = this.time.addEvent({
-            delay: 5000, 
+            delay: 5000,
             callback: this.spawnCarrot,
             callbackScope: this,
             loop: true,
@@ -107,7 +149,7 @@ class Play extends Phaser.Scene {
             fontFamily: "Arial",
         });
 
-        
+
         this.isPaused = false;
         this.pauseText = this.add.text(
             this.scale.width / 2,
@@ -137,19 +179,19 @@ class Play extends Phaser.Scene {
         this.physics.pause();
         this.player.anims.pause();
         this.pauseText.setVisible(true);
-        this.enemySpawnEvent.paused = true; 
+        this.enemySpawnEvent.paused = true;
         this.carrotSpawnEvent.paused = true;
-        this.sound.play("Pause"); 
+        this.sound.play("Pause");
     }
-    
+
     unpauseGame() {
         this.isPaused = false;
         this.physics.resume();
         this.player.anims.resume();
         this.pauseText.setVisible(false);
-        this.enemySpawnEvent.paused = false; 
-        this.carrotSpawnEvent.paused = false; 
-        this.sound.play("Pause"); 
+        this.enemySpawnEvent.paused = false;
+        this.carrotSpawnEvent.paused = false;
+        this.sound.play("Pause");
     }
 
     update() {
@@ -211,7 +253,7 @@ class Play extends Phaser.Scene {
         const minY = this.scale.height - 300;
         const maxY = this.scale.height - 150;
         const randomY = Phaser.Math.Between(minY, maxY);
-    
+
         const carrot = this.carrots.create(this.scale.width + 50, randomY, "carrot");
         carrot.setVelocityX(-200);
         carrot.setScale(0.08);
