@@ -8,7 +8,7 @@ class Play extends Phaser.Scene {
         this.load.spritesheet("runner", "assets/Run.png", { frameWidth: 2048, frameHeight: 1536 });
         this.load.spritesheet("jumper", "assets/Jump.png", { frameWidth: 128, frameHeight: 128 });
         this.load.image("wolf", "assets/Wolf.PNG");
-        this.load.image("carrot", "assets/Carrot.png");
+        this.load.image("carrot", "assets/Carrot.PNG");
         this.load.audio("jumpSound", "assets/Cartoon_Jump.wav");
         this.load.audio("gameOverSound", "assets/Game_Over.wav");
         this.load.audio("EatingSound", "assets/Eating_Carrot.mp3");
