@@ -226,6 +226,7 @@ class Play extends Phaser.Scene {
     }
 
     increaseDifficulty() {
+        if (this.isPaused) return;
         this.scrollSpeed += 0.5;
         this.enemySpawnDelay = Math.max(500, this.enemySpawnDelay - 500);
         this.playerGravity += 50;
